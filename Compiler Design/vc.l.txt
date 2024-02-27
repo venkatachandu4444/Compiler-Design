@@ -1,0 +1,22 @@
+%{
+    int vowel_count = 0; // variable to store the number of vowels
+    int consonant_count = 0; // variable to store the number of consonants
+%}
+
+%%
+
+[aeiouAEIOU] { vowel_count++; } // if a vowel is found, increment vowel_count
+[b-df-hj-np-tv-zB-DF-HJ-NP-TV-Z] { consonant_count++; } // if a consonant is found, increment consonant_count
+. ; // ignore any other character
+
+%%
+
+int yywrap() { return 1; } // function to indicate the end of input
+
+int main() {
+    printf("Enter a sentence:\n"); // prompt the user to enter a sentence
+    yylex(); // call the lexical analyzer
+    printf("Number of vowels: %d\n", vowel_count); // print the number of vowels
+    printf("Number of consonants: %d\n", consonant_count); // print the number of consonants
+    return 0;
+}
